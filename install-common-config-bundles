@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+script_dir=$(dirname $0)
+
+curl vimfiles.luan.sh/install | bash
+
+git clone git://github.com/bbatsov/prelude.git "${HOME}/.emacs.d"
+cp "${script_dir}/emacs-prelude-modules.el" "${HOME}/.emacs.d/prelude-modules.el"
