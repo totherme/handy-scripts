@@ -1,0 +1,40 @@
+#!/bin/bash
+set -e
+
+script_dir=$(dirname $0)
+
+(# luan vim
+    ls "${HOME}/.vim" > /dev/null 2> /dev/null \
+        || curl vimfiles.luan.sh/install | bash
+)
+
+(# emacs prelude
+    ls "${HOME}/.emacs.d" > /dev/null 2> /dev/null \
+        || git clone git://github.com/bbatsov/prelude.git "${HOME}/.emacs.d"
+    ls "${HOME}/.emacs.d/prelude-modules.el" > /dev/null 2> /dev/null \
+        || cp "${script_dir}/emacs-prelude-modules.el" \
+              "${HOME}/.emacs.d/prelude-modules.el"
+    ls "${HOME}/.emacs.d/personal/gds.el" > /dev/null 2> /dev/null \
+        || ln -s "${HOME}/elisp/gds.el" "${HOME}/.emacs.d/personal/gds.el"
+)
+
+(# emacs csp mode
+    cd "${HOME}/elisp/"
+    if [[ -d "${HOME}/elisp/csp-mode" ]] ; then
+        cd csp-mode
+        git pull -r
+    else
+        git clone https://github.com/zonix/csp-mode.git
+    fi
+)
+
+(# bosh lite
+    gem install --user bosh_cli --no-ri --no-rdoc
+    cd "${HOME}/workspace"
+    if [[ -d "${HOME}/workspace/bosh-lite" ]] ; then
+        cd bosh-lite
+        git pull -r
+    else
+        git clone https://github.com/cloudfoundry/bosh-lite
+    fi
+)

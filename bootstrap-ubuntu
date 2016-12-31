@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+script_dir=$(dirname $0)
+
+"${script_dir}/install-ubuntu-apps"
+"${script_dir}/install-common-things"
