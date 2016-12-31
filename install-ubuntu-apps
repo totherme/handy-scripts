@@ -1,10 +1,12 @@
-#!/bin/bash -e
+#!/bin/bash -eu
 
 main() {
+   echo "Installing ubuntu apps..."
    use_ppas
    install_easy_ubuntu_packages
    install_fdr
    install_virtualbox_and_vagrant
+   echo "Ubuntu apps successfully installed!"
 }
 
 use_ppas() {
