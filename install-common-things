@@ -1,11 +1,16 @@
 #!/bin/bash
 set -e
 
-script_dir=$(dirname $0)
+script_dir="$(dirname "$0")"
 
 (# luan vim
-    ls "${HOME}/.vim" > /dev/null 2> /dev/null \
-        || curl vimfiles.luan.sh/install | bash
+    if [[ -d ${HOME}/.vim ]] ; then
+        cd "${HOME}/.vim"
+        git pull -r
+        ./update
+    else
+        curl vimfiles.luan.sh/install | bash
+    fi
 )
 
 (# emacs prelude

@@ -12,7 +12,9 @@ main() {
 use_ppas() {
    for repo in \
       "ppa:hvr/ghc" \
-      "ppa:ubuntu-elisp/ppa" ; do
+      "ppa:ubuntu-elisp/ppa" \
+      "ppa:neovim-ppa/unstable"
+   do
       sudo add-apt-repository -y $repo
    done
 
@@ -32,7 +34,12 @@ install_easy_ubuntu_packages() {
       "libsqlite3-dev" "libxslt1-dev" "libpq-dev" "libmysqlclient-dev" \
       "zlib1g-dev" \
       "virtualbox" \
-      "openjdk-8-jdk" "maven" "gradle" ; do
+      "openjdk-8-jdk" "maven" "gradle" \
+      "shellcheck" \
+      "vim-nox" \
+      "python-dev" "python-pip" "python3-dev" "python3-pip" \
+      "neovim"
+   do
       sudo apt -y install $app
    done
 }
