@@ -1,0 +1,21 @@
+#!/bin/bash -eu
+
+repodir=$(dirname "$0")
+
+main() {
+  echo "About to check every package on your system for missing package-doc"
+  echo "and package-doc-nonfree; then install them."
+  echo
+  echo "This could take a while."
+  echo
+
+  "$repodir/list-missing-docs-packages" | install_packages
+}
+
+install_packages() {
+  while read package ; do
+    sudo apt-get -y install "$package"
+  done
+}
+
+main
