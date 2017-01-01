@@ -22,10 +22,10 @@
 # But what other docs packages am I missing? This little script will tell me.
 
 main() {
-  list_of_installed_packages | \
-    doc_package_of | \
-    filter_out_fictional_packages | \
-    filter_out_installed_packages
+  list_of_installed_packages \
+    | doc_packages_of \
+    | filter_out_installed_packages \
+    | filter_out_fictional_packages
 }
 
 list_of_installed_packages() {
@@ -36,9 +36,10 @@ list_of_installed_packages() {
     awk -F: '{print $1}'
 }
 
-doc_package_of() {
+doc_packages_of() {
   while read package ; do
     echo "${package}-doc"
+    echo "${package}-doc-nonfree"
   done
 }
 
