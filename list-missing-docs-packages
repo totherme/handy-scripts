@@ -37,13 +37,13 @@ list_of_installed_packages() {
 }
 
 doc_package_of() {
-  while read -r package ; do
+  while read package ; do
     echo "${package}-doc"
   done
 }
 
 filter_out_fictional_packages() {
-  while read -r package ; do
+  while read package ; do
     if package_exists "$package" ; then
       echo "$package"
     fi
@@ -51,7 +51,7 @@ filter_out_fictional_packages() {
 }
 
 filter_out_installed_packages() {
-  while read -r package ; do
+  while read package ; do
     if ! package_is_installed "$package" ; then
       echo "$package"
     fi
@@ -63,7 +63,7 @@ package_exists() {
     fail "package_exists requires 1 argument"
   fi
   package=$1
-  apt-cache search "$package" | grep "$package" > /dev/null
+  apt-cache search "$package" | grep "^$package - " > /dev/null
 }
 
 package_is_installed() {
