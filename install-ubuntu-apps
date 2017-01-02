@@ -6,6 +6,7 @@ main() {
    install_easy_ubuntu_packages
    install_fdr
    install_virtualbox_and_vagrant
+   install_bosh2_cli
    echo "Ubuntu apps successfully installed!"
 }
 
@@ -62,6 +63,11 @@ install_virtualbox_and_vagrant() {
    fi
 
    sudo apt -y install vagrant
+}
+
+install_bosh2_cli() {
+   wget -O "${HOME}/bin/bosh2" https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-0.0.141-linux-amd64
+   chmod +x "${HOME}/bin/bosh2"
 }
 
 main
